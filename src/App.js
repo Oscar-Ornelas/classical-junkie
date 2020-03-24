@@ -21,8 +21,6 @@ function App() {
       artists: [{ name: "" }],
       duration_ms: 0
   });
-  const [isPlaying, setIsPlaying] = useState("Paused");
-  const [progressMs, setProgressMs] = useState(0);
 
   function getCurrentlyPlaying(token) {
     fetch("https://api.spotify.com/v1/me/player/currently-playing", {
@@ -34,8 +32,6 @@ function App() {
     .then(response => response.json())
     .then(data => {
       setItem(data.item);
-      setIsPlaying(data.is_playing);
-      setProgressMs(data.progress_ms);
     })
   }
 
@@ -75,9 +71,8 @@ function App() {
       )}
       {(token) && (
         <Player
+          token={token}
           item={item}
-          isPlaying={isPlaying}
-          progressMs={progressMs}
         />
       )}
       </header>
