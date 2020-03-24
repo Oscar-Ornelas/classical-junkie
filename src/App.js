@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import logo from "./logo.svg";
 import Player from "./Player";
 import "./App.css";
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -66,7 +65,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
       {!token && (
         <a
           className="btn btn--loginApp-link"
