@@ -32,7 +32,7 @@ function PlayerFooter(props) {
     if(currentlyPlaying && progressMs < durationMs && isPlaying) {
       const timeoutId = setTimeout(() => {
         setProgressStyles({width: `${progressMs * 100 / durationMs}%`});
-        setProgressMs(prevProgressMs => prevProgressMs + 13);
+        setProgressMs(prevProgressMs => prevProgressMs + 12);
       }, 10)
 
       return () => clearTimeout(timeoutId);

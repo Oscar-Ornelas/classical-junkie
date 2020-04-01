@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from "react";
-import "./App.css";
-import home_background from './imgs/home_background.PNG';
-import Player from "./components/Player";
-import PlayerFooter from "./components/PlayerFooter";
+import React, {useState, useEffect} from 'react';
+import {Switch, Route, useHistory} from 'react-router-dom';
+import './App.css';
+import Home from './components/Home';
+import Player from './components/Player';
+import PlayerFooter from './components/PlayerFooter';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // Replace with your app's client ID, redirect URI and desired scopes
@@ -28,6 +29,7 @@ function App() {
       artists: [{ name: "" }],
       duration_ms: 0
   });
+  const history = useHistory();
 
   useEffect(() => {
     const hash = window.location.hash
@@ -47,36 +49,34 @@ function App() {
 
     if (accessToken) {
       setToken(accessToken);
+      history.push('/search')
     }
 
   }, [])
 
   return (
     <div className="App">
-      <header className="App-header">
-      {!token && (
-        <div className="home" style={{backgroundImage: `url(${home_background})`}}>
-          <div className="home-container">
-            <h1 className="home-header">Classical Junkie</h1>
-            <p className="home-subtitle">Scratch your classical music itch and listen to the classics you've been searching for</p>
-            <a
-              className="home-btn-link"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
-            <p className="home-attribution">Powered By the Spotify Web API and Web Playback SDK</p>
-          </div>
-        </div>
-      )}
-      {(token) && (
-        <Player setCurrentUri={setCurrentUri} token={token}/>
-      )}
-      </header>
+      <Switch>
+        <Route exact path="/">
+          {!token && (
+            <Home
+              authEndpoint={authEndpoint}
+              clientId={clientId}
+              redirectUri={redirectUri}
+              scopes={scopes}
+            />
+          )}
+        </Route>
+        <Route path="/search">
+          {(token) && (
+            <Player setCurrentUri={setCurrentUri} token={token}/>
+          )}
+        </Route>
+      </Switch>
       <footer>
-      {(token) && (
-        <PlayerFooter currentUri={currentUri} token={token}/>
-      )}
+        {(token) && (
+          <PlayerFooter currentUri={currentUri} token={token}/>
+        )}
       </footer>
     </div>
   );
