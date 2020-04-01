@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/classical-junkie/static/css/main.f244ba82.chunk.css",
+    "main.js": "/classical-junkie/static/js/main.b895ec30.chunk.js",
+    "main.js.map": "/classical-junkie/static/js/main.b895ec30.chunk.js.map",
+    "runtime-main.js": "/classical-junkie/static/js/runtime-main.d70476b4.js",
+    "runtime-main.js.map": "/classical-junkie/static/js/runtime-main.d70476b4.js.map",
+    "static/js/2.7fdfb9ba.chunk.js": "/classical-junkie/static/js/2.7fdfb9ba.chunk.js",
+    "static/js/2.7fdfb9ba.chunk.js.map": "/classical-junkie/static/js/2.7fdfb9ba.chunk.js.map",
+    "index.html": "/classical-junkie/index.html",
+    "precache-manifest.31b758e7afaf6ca16a534cc8cf59ffc8.js": "/classical-junkie/precache-manifest.31b758e7afaf6ca16a534cc8cf59ffc8.js",
+    "service-worker.js": "/classical-junkie/service-worker.js",
+    "static/css/main.f244ba82.chunk.css.map": "/classical-junkie/static/css/main.f244ba82.chunk.css.map",
+    "static/js/2.7fdfb9ba.chunk.js.LICENSE.txt": "/classical-junkie/static/js/2.7fdfb9ba.chunk.js.LICENSE.txt",
+    "static/media/home_background.PNG": "/classical-junkie/static/media/home_background.3af6fdb3.PNG"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d70476b4.js",
+    "static/js/2.7fdfb9ba.chunk.js",
+    "static/css/main.f244ba82.chunk.css",
+    "static/js/main.b895ec30.chunk.js"
+  ]
+}
