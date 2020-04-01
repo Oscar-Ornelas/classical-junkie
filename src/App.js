@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
-import Player from "./Player";
 import "./App.css";
+import home_background from './imgs/home_background.PNG';
+import Player from "./components/Player";
+import PlayerFooter from "./components/PlayerFooter";
+
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = "5ab1ad0488a045ada24732decaec33d3";
@@ -8,10 +11,14 @@ const redirectUri = "http://localhost:3000";
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
-  "user-modify-playback-state"
+  "user-modify-playback-state",
+  "streaming",
+  "user-read-email",
+  "user-read-private"
 ];
 
 function App() {
+  const [currentUri, setCurrentUri] = useState("");
   const [token, setToken] = useState(null);
   const [item, setItem] = useState({
       album: {
@@ -21,19 +28,6 @@ function App() {
       artists: [{ name: "" }],
       duration_ms: 0
   });
-
-  function getCurrentlyPlaying(token) {
-    fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      setItem(data.item);
-    })
-  }
 
   useEffect(() => {
     const hash = window.location.hash
@@ -53,7 +47,6 @@ function App() {
 
     if (accessToken) {
       setToken(accessToken);
-      getCurrentlyPlaying(accessToken)
     }
 
   }, [])
@@ -62,20 +55,29 @@ function App() {
     <div className="App">
       <header className="App-header">
       {!token && (
-        <a
-          className="btn btn--loginApp-link"
-          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
-        >
-          Login to Spotify
-        </a>
+        <div className="home" style={{backgroundImage: `url(${home_background})`}}>
+          <div className="home-container">
+            <h1 className="home-header">Classical Junkie</h1>
+            <p className="home-subtitle">Scratch your classical music itch and listen to the classics you've been searching for</p>
+            <a
+              className="home-btn-link"
+              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
+            >
+              Login to Spotify
+            </a>
+            <p className="home-attribution">Powered By the Spotify Web API and Web Playback SDK</p>
+          </div>
+        </div>
       )}
       {(token) && (
-        <Player
-          token={token}
-          item={item}
-        />
+        <Player setCurrentUri={setCurrentUri} token={token}/>
       )}
       </header>
+      <footer>
+      {(token) && (
+        <PlayerFooter currentUri={currentUri} token={token}/>
+      )}
+      </footer>
     </div>
   );
 
