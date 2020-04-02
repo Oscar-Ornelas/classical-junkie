@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import ReactPlayer from 'react-player';
 
 function Player(props) {
   const [searchInput, setSearchInput] = useState("");
   const [data, setData] = useState({});
-  const textRef = useRef(null);
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -35,7 +34,7 @@ function Player(props) {
 
   function search(e) {
     e.preventDefault();
-    fetch(`https://api.spotify.com/v1/search?q=${searchInput.split(" ").join('%20')}&type=artist,track&limit=5`, {
+    fetch(`https://api.spotify.com/v1/search?q=${searchInput.split(" ").join('%20')}&type=artist,track,album&limit=2`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${props.token}`
@@ -67,10 +66,34 @@ function Player(props) {
             <div className="search-item" key={item.uri}>
               <div className="search-item-main" onClick={() => play(item.uri)}>
                 <div className="search-item-info">
-                  <p className="search-item-name" ref={textRef}>{item.name}</p>
+                  <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.artists.map(artist => artist.name).join(", ")}</p>
                 </div>
                 <img className="search-img" src={item.album.images[1].url}/>
+              </div>
+              <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
+            </div>
+          ))}
+          {data.albums !== undefined && data.albums.items.map(item => (
+            <div className="search-item" key={item.uri}>
+              <div className="search-item-main" onClick={() => play(item.uri)}>
+                <div className="search-item-info">
+                  <p className="search-item-name">{item.name}</p>
+                  <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.artists.map(artist => artist.name).join(", ")}</p>
+                </div>
+                <img className="search-img" src={item.images[1].url}/>
+              </div>
+              <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
+            </div>
+          ))}
+          {data.artists !== undefined && data.artists.items.map(item => (
+            <div className="search-item" key={item.uri}>
+              <div className="search-item-main" onClick={() => play(item.uri)}>
+                <div className="search-item-info">
+                  <p className="search-item-name">{item.name}</p>
+                  <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.name}</p>
+                </div>
+                <img className="search-img search-artist-img" src={item.images[1].url}/>
               </div>
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>
