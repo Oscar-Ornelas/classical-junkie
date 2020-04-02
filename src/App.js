@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Switch, Route, useHistory} from 'react-router-dom';
+import {Switch, Route, useHistory, Redirect} from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import Player from './components/Player';
 import PlayerFooter from './components/PlayerFooter';
+import Album from './components/Album';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // Replace with your app's client ID, redirect URI and desired scopes
@@ -54,6 +55,17 @@ function App() {
 
   }, [])
 
+  function play(uri) {
+    fetch("https://api.spotify.com/v1/me/player/play", {
+      method: 'PUT',
+      body: JSON.stringify({ uris: [uri] }),
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    setCurrentUri(uri);
+  }
+
   return (
     <div className="App">
       <Switch>
@@ -68,9 +80,14 @@ function App() {
           )}
         </Route>
         <Route path="/search">
-          {(token) && (
-            <Player setCurrentUri={setCurrentUri} token={token}/>
-          )}
+          {(token) ? (
+            <Player play={play} token={token}/>
+          ) : <Redirect to="/"/>}
+        </Route>
+        <Route path="/album/:albumId">
+          {(token) ? (
+            <Album play={play} token={token}/>
+          ) : <Redirect to="/"/>}
         </Route>
       </Switch>
       <footer>

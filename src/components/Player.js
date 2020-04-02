@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
+import {useHistory} from 'react-router-dom';
 import ReactPlayer from 'react-player';
 
 function Player(props) {
   const [searchInput, setSearchInput] = useState("");
   const [data, setData] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -19,17 +21,6 @@ function Player(props) {
   function handleChange(e) {
     const {value} = e.target;
     setSearchInput(value);
-  }
-
-  function play(uri) {
-    fetch("https://api.spotify.com/v1/me/player/play", {
-      method: 'PUT',
-      body: JSON.stringify({ uris: [uri] }),
-      headers: {
-        Authorization: `Bearer ${props.token}`
-      }
-    })
-    props.setCurrentUri(uri);
   }
 
   function search(e) {
@@ -63,8 +54,8 @@ function Player(props) {
       ) : (
         <ul className="search-list">
           {data.tracks !== undefined && data.tracks.items.map(item => (
-            <div className="search-item" key={item.uri}>
-              <div className="search-item-main" onClick={() => play(item.uri)}>
+            <div className="search-item" key={item.id}>
+              <div className="search-item-main" onClick={() => props.play(item.uri)}>
                 <div className="search-item-info">
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.artists.map(artist => artist.name).join(", ")}</p>
@@ -76,7 +67,7 @@ function Player(props) {
           ))}
           {data.albums !== undefined && data.albums.items.map(item => (
             <div className="search-item" key={item.uri}>
-              <div className="search-item-main" onClick={() => play(item.uri)}>
+              <div className="search-item-main" onClick={() => history.push(`/album/${item.id}`)}>
                 <div className="search-item-info">
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.artists.map(artist => artist.name).join(", ")}</p>
@@ -88,7 +79,7 @@ function Player(props) {
           ))}
           {data.artists !== undefined && data.artists.items.map(item => (
             <div className="search-item" key={item.uri}>
-              <div className="search-item-main" onClick={() => play(item.uri)}>
+              <div className="search-item-main" onClick={() => props.play(item.uri)}>
                 <div className="search-item-info">
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.name}</p>
