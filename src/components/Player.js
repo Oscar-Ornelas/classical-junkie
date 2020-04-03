@@ -7,17 +7,6 @@ function Player(props) {
   const [data, setData] = useState({});
   const history = useHistory();
 
-  useEffect(() => {
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const player = new window.Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(props.token); }
-      });
-
-      player.connect()
-    };
-  }, [])
-
   function handleChange(e) {
     const {value} = e.target;
     setSearchInput(value);

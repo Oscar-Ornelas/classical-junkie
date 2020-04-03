@@ -22,14 +22,7 @@ const scopes = [
 function App() {
   const [currentUri, setCurrentUri] = useState("");
   const [token, setToken] = useState(null);
-  const [item, setItem] = useState({
-      album: {
-        images: [{ url: "" }]
-      },
-      name: "",
-      artists: [{ name: "" }],
-      duration_ms: 0
-  });
+  const [deviceId, setDeviceId] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -55,8 +48,27 @@ function App() {
 
   }, [])
 
+  useEffect(() => {
+    if(token) {
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        const player = new window.Spotify.Player({
+          name: 'Classical Junkie Player',
+          getOAuthToken: cb => { cb(token); }
+        });
+
+        player.connect()
+
+        player.addListener('ready', ({ device_id }) => {
+          console.log(device_id);
+          setDeviceId(device_id);
+          player.removeListener('ready');
+        })
+      }
+    }
+  }, [token])
+
   function play(uri) {
-    fetch("https://api.spotify.com/v1/me/player/play", {
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
       method: 'PUT',
       body: JSON.stringify({ uris: [uri] }),
       headers: {
