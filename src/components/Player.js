@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useHistory} from 'react-router-dom';
-import ReactPlayer from 'react-player';
+import {portrait_placeholder} from '../imgs/portrait_placeholder.png';
 
 function Player(props) {
   const [searchInput, setSearchInput] = useState("");
@@ -42,7 +42,7 @@ function Player(props) {
         </div>
       ) : (
         <ul className="search-list">
-          {data.tracks !== undefined && data.tracks.items.map(item => (
+          {data.tracks.items !== undefined && data.tracks.items.map(item => (
             <div className="search-item" key={item.id}>
               <div className="search-item-main" onClick={() => props.play(item.uri)}>
                 <div className="search-item-info">
@@ -54,7 +54,7 @@ function Player(props) {
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>
           ))}
-          {data.albums !== undefined && data.albums.items.map(item => (
+          {data.albums.items !== undefined && data.albums.items.map(item => (
             <div className="search-item" key={item.uri}>
               <div className="search-item-main" onClick={() => history.push(`/album/${item.id}`)}>
                 <div className="search-item-info">
@@ -66,14 +66,14 @@ function Player(props) {
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>
           ))}
-          {data.artists !== undefined && data.artists.items.map(item => (
+          {data.artists.items !== undefined && data.artists.items.map(item => (
             <div className="search-item" key={item.uri}>
-              <div className="search-item-main" onClick={() => props.play(item.uri)}>
+              <div className="search-item-main" onClick={() => history.push(`/artist/${item.id}`)}>
                 <div className="search-item-info">
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.name}</p>
                 </div>
-                <img className="search-img search-artist-img" src={item.images[1].url}/>
+                <img className="search-img search-artist-img" src={item.images[1] === undefined ? portrait_placeholder : item.images[1].url}/>
               </div>
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>

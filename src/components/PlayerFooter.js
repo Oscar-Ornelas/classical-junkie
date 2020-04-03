@@ -27,15 +27,6 @@ function PlayerFooter(props) {
       .catch(err => console.log(err))
     }, 1000)
 
-    fetch("https://api.spotify.com/v1/me/player/devices", {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${props.token}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-
   }, [props.currentUri])
 
   useEffect(() => {
