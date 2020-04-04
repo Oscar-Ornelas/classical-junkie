@@ -49,7 +49,7 @@ function Player(props) {
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.artists.map(artist => artist.name).join(", ")}</p>
                 </div>
-                <img className="search-img" src={item.album.images[1].url}/>
+                <img className="search-item-img" src={item.album.images[1].url}/>
               </div>
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>
@@ -61,7 +61,7 @@ function Player(props) {
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.artists.map(artist => artist.name).join(", ")}</p>
                 </div>
-                <img className="search-img" src={item.images[1].url}/>
+                <img className="search-item-img" src={item.images[1].url}/>
               </div>
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>
@@ -73,7 +73,7 @@ function Player(props) {
                   <p className="search-item-name">{item.name}</p>
                   <p className="search-item-artists">{item.type === "track" ? "Song" : item.type} <i className="fas fa-circle"></i> {item.name}</p>
                 </div>
-                <img className="search-img search-artist-img" src={item.images[1] === undefined ? portrait_placeholder : item.images[1].url}/>
+                <img className="search-item-img search-artist-img" src={item.images[1] === undefined ? portrait_placeholder : item.images[1].url}/>
               </div>
               <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
             </div>

@@ -6,6 +6,7 @@ import Player from './components/Player';
 import PlayerFooter from './components/PlayerFooter';
 import Album from './components/Album';
 import Artist from './components/Artist';
+import ArtistReleases from './components/ArtistReleases'
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // Replace with your app's client ID, redirect URI and desired scopes
@@ -60,7 +61,6 @@ function App() {
         player.connect()
 
         player.addListener('ready', ({ device_id }) => {
-          console.log(device_id);
           setDeviceId(device_id);
           player.removeListener('ready');
         })
@@ -103,9 +103,14 @@ function App() {
             <Album play={play} token={token}/>
           ) : <Redirect to="/"/>}
         </Route>
-        <Route path="/artist/:artistId">
+        <Route exact path="/artist/:artistId">
           {(token) ? (
             <Artist play={play} token={token}/>
+          ) : <Redirect to="/"/>}
+        </Route>
+        <Route path="/artist/:artistId/releases">
+          {(token) ? (
+            <ArtistReleases play={play} token={token}/>
           ) : <Redirect to="/"/>}
         </Route>
       </Switch>

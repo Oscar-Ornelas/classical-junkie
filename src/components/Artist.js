@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 
 function Artist(props) {
-  const [artist, setArtist] = useState({info: {}, albums: {}, topTracks: [], relatedArtists:{}});
+  const [artist, setArtist] = useState({info: {}, releases: [], topTracks: [], relatedArtists:{}});
   const {artistId} = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
@@ -22,10 +23,17 @@ function Artist(props) {
       }
     })
     .then(response => response.json())
-    .then(data => {
-      console.log(data.tracks)
-      setArtist(prevArtist => ({...prevArtist, topTracks: data.tracks}))
+    .then(data => setArtist(prevArtist => ({...prevArtist, topTracks: data.tracks})))
+  }, [])
+
+  useEffect(() => {
+    fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=5`, {
+      headers: {
+        Authorization: `Bearer ${props.token}`
+      }
     })
+    .then(response => response.json())
+    .then(data => setArtist(prevArtist => ({...prevArtist, releases: data.items})))
   }, [])
 
   return (
@@ -61,6 +69,26 @@ function Artist(props) {
                   }
                 })}
               </ul>
+              </>
+            )}
+          </section>
+
+          <section className="artist-releases artist-section">
+            {artist.releases !== undefined && (
+              <>
+              <h3 className="artist-section-header">Latest Releases</h3>
+              <ul className="releases-list">
+                {artist.releases.map(release => (
+                  <div className="releases-item" key={release.id} onClick={() => history.push(`/album/${release.id}`)}>
+                    <div className="releases-item-info">
+                      <p className="releases-item-name">{release.name}</p>
+                      <p className="releases-item-year">{release.release_date.slice(0, 4)}<i className="fas fa-circle"></i>{release.type === "track" ? "Song" : release.type}</p>
+                    </div>
+                    <img className="releases-item-img" src={release.images[1].url}/>
+                  </div>
+                ))}
+              </ul>
+              <button onClick={() => history.push(`/artist/${artistId}/releases`)} className="releases-btn"><strong>See Discography</strong></button>
               </>
             )}
           </section>

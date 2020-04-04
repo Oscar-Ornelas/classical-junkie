@@ -12,6 +12,14 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+ul {
+  padding: 0;
+}
+
+strong {
+  font-weight: 700;
+}
+
 img {
   width: 100%;
   display: block;
@@ -147,25 +155,30 @@ img {
   margin: 0.5em 0;
 }
 
-.search-item-main {
+.search-item-main,
+.releases-item {
   width: 95%;
   display: flex;
   align-items: center;
   cursor: pointer;
-  overflow: hidden;
 }
 
 .search-item-info,
-.track-list-item-info {
+.track-list-item-info,
+.releases-item-info {
   width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.search-img {
+.search-item-img,
+.releases-item-img {
   width: 75px;
   height: 75px;
+  object-fit: cover;
+  order: -1;
+  margin: 0 1em 0 0;
 }
 
 .search-artist-img {
@@ -175,13 +188,23 @@ img {
 }
 
 .search-item-name,
-.search-item-artists {
-  text-transform: capitalize;
+.search-item-artists,
+.releases-item-name,
+.releases-item-year,
+.track-list-item-name,
+.track-list-item-artists {
   margin: 0.3em 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.search-item-artists,
+.releases-item-year,
+.track-list-item-artists {
+  text-transform: capitalize;
+}
+
 
 .fa-ellipsis-v {
   font-size: 1.3rem;
@@ -222,18 +245,18 @@ img {
   margin: 0 0 8em 0;
 }
 
-.track-list-item {
+.track-list-item,
+.releases-item {
   margin: 0 0 1em 0;
+}
+
+.track-list-item {
   cursor: pointer;
 }
 
 .track-list-item-name,
 .track-list-item-artists {
-  min-width: 0;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .track-list-item-name {
@@ -254,7 +277,7 @@ img {
   align-items: flex-end;
   text-align: center;
   justify-content: center;
-  padding: 0 0 2em 0
+  padding: 0 0 0.5em 0
 }
 
 .artist-info-name {
@@ -266,7 +289,7 @@ img {
 }
 
 .artist-section {
-  margin: 2em 0 0 0;
+  margin: 3em 0 0 0;
 }
 
 .artist-section-header {
@@ -276,7 +299,7 @@ img {
 }
 
 .artist-track-list {
-  padding: 0;
+  margin: 0;
 }
 
 .artist-track-list-item-info {
@@ -291,6 +314,33 @@ img {
 .track-list-item-num {
   margin: 0 1em 0 0;
   opacity: 0.7;
+}
+
+.artist-releases {
+  displaY: flex;
+  flex-direction: column;
+}
+
+.releases-btn {
+  font-size: 0.9rem;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #515151;
+  background: #111111;
+  align-self: center;
+  padding: 7px 20px;
+  border-radius: 10px;
+}
+
+/* ArtistReleases */
+.all-releases {
+  margin: 0 0 8em 0;
+}
+
+.all-releases-section {
+  margin: 2em 0 0 0;
 }
 
 /* PlayerFooter */
