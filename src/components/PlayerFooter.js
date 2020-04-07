@@ -22,8 +22,6 @@ function PlayerFooter(props) {
     } else if(progressMs >= durationMs) {
       setProgressStyles({width: "0%"});
       getCurrentlyPlaying();
-    } else {
-      setIsPlaying(false);
     }
   }, [progressMs, isPlaying])
 
