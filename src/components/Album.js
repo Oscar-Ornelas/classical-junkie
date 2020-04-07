@@ -32,7 +32,7 @@ function Album(props) {
             <img className="album-info-img" src={album.images[1].url}/>
           </div>
 
-          <ul className="track-list">
+          <ul className="container track-list">
             {album.tracks.items.map(track => (
               <div key={track.id} className="track-list-item">
                 <div className="track-list-item-info" onClick={() => props.play(track.uri)}>

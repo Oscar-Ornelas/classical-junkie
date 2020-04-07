@@ -12,25 +12,18 @@ function PlayerFooter(props) {
   }, [props.currentUri])
 
   useEffect(() => {
-    fetch(`https://api.spotify.com/v1/me/player/shuffle?state=true`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${props.token}`
-      }
-    })
-  }, [])
-
-  useEffect(() => {
     if(currentlyPlaying && progressMs < durationMs && isPlaying) {
       const timeoutId = setTimeout(() => {
         setProgressStyles({width: `${progressMs * 100 / durationMs}%`});
-        setProgressMs(prevProgressMs => prevProgressMs + 11);
-      }, 10)
+        setProgressMs(prevProgressMs => prevProgressMs + 1000);
+      }, 1000)
 
       return () => clearTimeout(timeoutId);
-
-    } else {
+    } else if(progressMs >= durationMs) {
       setProgressStyles({width: "0%"});
+      getCurrentlyPlaying();
+    } else {
+      setIsPlaying(false);
     }
   }, [progressMs, isPlaying])
 
@@ -118,7 +111,7 @@ function PlayerFooter(props) {
                 </div>
               </div>
 
-            <img className="player-footer-img" src={currentlyPlaying.item.album.images[1].url}/>
+            <img className="player-footer-img" src={currentlyPlaying.item.album.images[0].url}/>
           </div>
         </>
       )}

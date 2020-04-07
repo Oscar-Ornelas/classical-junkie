@@ -27,6 +27,8 @@ img {
 
 .container {
   padding: 0 1.5em;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .go-back,
@@ -45,6 +47,17 @@ img {
 .search {
   right: 0;
   padding: 1em 1em 0 0;
+}
+
+@media (min-width: 800px) {
+  .container {
+    padding: 0 5em;
+  }
+
+  .go-back,
+  .search {
+    font-size: 2.5rem;
+  }
 }
 
 /* Home */
@@ -243,7 +256,7 @@ img {
   background: #313131;
   color: #fff;
   outline: none;
-  width: 200px;
+  width: 300px;
   padding: 1em;
 }
 
@@ -321,8 +334,7 @@ img {
 }
 
 .track-list {
-  padding: 2em 1.5em 0 1.5em;
-  margin: 0 0 8em 0;
+  margin: 0 auto 8em auto;
 }
 
 .track-list-item,
@@ -349,15 +361,20 @@ img {
 }
 
 /* Artists */
+.artist-container {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
 .artist-info {
   background-size: cover;
   background-position: center;
-  height: 350px;
+  height: 400px;
   display: flex;
   align-items: flex-end;
   text-align: center;
   justify-content: center;
-  padding: 0 0 0.5em 0
+  padding: 0 0 2em 0
 }
 
 .artist-info-name {
@@ -365,7 +382,7 @@ img {
 }
 
 .artist-main {
-  margin: 0 0 8em 0;
+  margin: 0 auto 8em auto;
 }
 
 .artist-section {
@@ -397,7 +414,7 @@ img {
 }
 
 .artist-releases {
-  displaY: flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -414,9 +431,15 @@ img {
   border-radius: 10px;
 }
 
+@media (min-width: 900px) {
+  .artist-info {
+    height: 450px;
+  }
+}
+
 /* ArtistReleases */
 .all-releases {
-  margin: 4em 0 8em 0;
+  margin: 4em auto 8em auto;
 }
 
 .all-releases-section {
@@ -436,20 +459,20 @@ img {
   align-items: center;
   background: #333333;
   width: 100%;
-  height: 110px;
+  height: 120px;
 }
 
 .player-footer-img {
   object-fit: cover;
   order: -1;
-  width: 100px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
 }
 
 .player-footer-info {
   margin: 0 auto;
   width: 100%;
-  max-width: 600px;
+  max-width: 550px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -471,7 +494,7 @@ img {
   outline: none;
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 0 0.25em;
+  margin: 0 0.5em;
 }
 
 .player-footer-progress-container {
