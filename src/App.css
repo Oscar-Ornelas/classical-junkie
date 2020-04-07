@@ -29,6 +29,24 @@ img {
   padding: 0 1.5em;
 }
 
+.go-back,
+.search {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.go-back {
+  left: 0;
+  padding: 1em 0 0 1em;
+}
+
+.search {
+  right: 0;
+  padding: 1em 1em 0 0;
+}
+
 /* Home */
 .home {
   min-height: 100vh;
@@ -398,7 +416,7 @@ img {
 
 /* ArtistReleases */
 .all-releases {
-  margin: 0 0 8em 0;
+  margin: 4em 0 8em 0;
 }
 
 .all-releases-section {

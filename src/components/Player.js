@@ -27,6 +27,7 @@ function Player(props) {
       console.log(data);
       setData(data);
     })
+    history.push(`/search/${searchInput}`)
   }
 
   return (
