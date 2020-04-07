@@ -36,6 +36,8 @@ function Album(props) {
                 <p className="track-list-item-artists">{track.artists.map(artist => artist.name).join(", ")}</p>
               </div>
               <MoreInfoModal
+                albumId={album.id}
+                artistId={album.artists[0].id}
                 token={props.token}
                 trackUri={track.uri}
                 trackName={track.name}

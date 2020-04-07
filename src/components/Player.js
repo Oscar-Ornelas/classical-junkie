@@ -54,6 +54,8 @@ function Player(props) {
                 <img className="search-item-img" src={item.album.images[1].url}/>
               </div>
               <MoreInfoModal
+                albumId={item.album.id}
+                artistId={item.album.artists[0].id}
                 token={props.token}
                 trackUri={item.uri}
                 trackName={item.name}
@@ -63,7 +65,7 @@ function Player(props) {
             </div>
           ))}
           {data.albums.items !== undefined && data.albums.items.map(item => (
-            <div className="search-item" key={item.uri}>
+            <div className="search-item" key={item.id}>
               <div className="search-item-main" onClick={() => history.push(`/album/${item.id}`)}>
                 <div className="search-item-info">
                   <p className="search-item-name">{item.name}</p>
@@ -71,10 +73,20 @@ function Player(props) {
                 </div>
                 <img className="search-item-img" src={item.images[1].url}/>
               </div>
+              <MoreInfoModal
+                albumId={item.id}
+                artistId={item.artists[0].id}
+                itemType={item.type}
+                token={props.token}
+                trackUri={item.uri}
+                trackName={item.name}
+                trackArtists={item.artists.map(artist => artist.name).join(", ")}
+                trackImg={item.images[1].url}
+              />
             </div>
           ))}
           {data.artists.items !== undefined && data.artists.items.map(item => (
-            <div className="search-item" key={item.uri}>
+            <div className="search-item" key={item.id}>
               <div className="search-item-main" onClick={() => history.push(`/artist/${item.id}`)}>
                 <div className="search-item-info">
                   <p className="search-item-name">{item.name}</p>

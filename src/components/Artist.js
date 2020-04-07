@@ -65,6 +65,8 @@ function Artist(props) {
                           </div>
                         </div>
                         <MoreInfoModal
+                          albumId={track.album.id}
+                          artistId={artistId}
                           token={props.token}
                           trackUri={track.uri}
                           trackName={track.name}
