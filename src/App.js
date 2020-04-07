@@ -11,7 +11,7 @@ import ArtistReleases from './components/ArtistReleases'
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = "5ab1ad0488a045ada24732decaec33d3";
-const redirectUri = "http://localhost:3000";
+const redirectUri = "https://oscar-ornelas.github.io/classical-junkie/";
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
