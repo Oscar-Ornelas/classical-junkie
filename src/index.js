@@ -6,7 +6,7 @@ import App from './App';
 
 
 ReactDOM.render(
-  <Router>
+  <Router basename="/classical-junkie">
     <ScrollToTop/>
     <App />
   </Router>,
