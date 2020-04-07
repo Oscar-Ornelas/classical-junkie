@@ -116,7 +116,7 @@ function App() {
       </Switch>
       <footer>
         {(token) && (
-          <PlayerFooter currentUri={currentUri} token={token}/>
+          <PlayerFooter deviceId={deviceId}setCurrentUri={setCurrentUri} currentUri={currentUri} token={token}/>
         )}
       </footer>
     </div>

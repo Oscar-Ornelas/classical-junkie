@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import MoreInfoModal from './MoreInfoModal';
 
 function Album(props) {
   const [album, setAlbum] = useState({});
@@ -34,7 +35,13 @@ function Album(props) {
                 <p className="track-list-item-name">{track.name}</p>
                 <p className="track-list-item-artists">{track.artists.map(artist => artist.name).join(", ")}</p>
               </div>
-              <i onClick={() => console.log("Hello")} className="fas fa-ellipsis-v"></i>
+              <MoreInfoModal
+                token={props.token}
+                trackUri={track.uri}
+                trackName={track.name}
+                trackArtists={track.artists.map(artist => artist.name).join(", ")}
+                trackImg={album.images[1].url}
+              />
             </div>
           ))}
         </ul>

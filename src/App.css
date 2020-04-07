@@ -212,6 +212,68 @@ img {
   cursor: pointer;
 }
 
+/* MoreInfoModal */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background: #313131;
+  color: #fff;
+  outline: none;
+  width: 200px;
+  padding: 1em;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-header-img {
+  order: -1;
+}
+
+.modal-header-name,
+.modal-header-artists {
+  margin: 0.5em 0 0 0;
+}
+
+.modal-header-artists {
+  opacity: 0.8;
+}
+
+.modal-options {
+  margin: 1.5em 0 0 0;
+}
+
+.modal-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 0 1em 0;
+  cursor: pointer;
+}
+
+.modal-option-description {
+  margin: 0 0 0 1em;
+}
+
 /* Album */
 .album-info {
   display: flex;
@@ -344,6 +406,56 @@ img {
 }
 
 /* PlayerFooter */
+.player-footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.player-footer {
+  display: flex;
+  align-items: center;
+  background: #333333;
+  width: 100%;
+  height: 110px;
+}
+
+.player-footer-img {
+  object-fit: cover;
+  order: -1;
+  width: 100px;
+  height: 110px;
+}
+
+.player-footer-info {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5em;
+}
+
+.player-footer-controls {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.player-footer-btn {
+  background: #333333;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 0 0.25em;
+}
+
 .player-footer-progress-container {
   width: 100%;
   background: #777777;
@@ -355,44 +467,21 @@ img {
   background-color: #fff;
 }
 
-.player-footer-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.player-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #333333;
+.player-footer-track {
   width: 100%;
-}
-
-.player-footer-main {
-  width: 80%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.player-footer-img,
-.search-img {
-  object-fit: cover;
-  order: -1;
-  margin: 0 0.75em 0 0;
-}
-
-.player-footer-img {
-  width: 100px;
-  height: 100px;
-}
-
-.player-footer-info {
-  width: 80%;
+  min-width: 0;
   white-space: nowrap;
   overflow-x: auto;
+  margin: 0 auto;
+}
+
+.player-footer-track-info {
+  text-align: center;
+}
+
+.player-footer-artists,
+.search-item-artists {
+  opacity: 0.7;
 }
 
 .fa-circle {
@@ -401,17 +490,8 @@ img {
   font-size: 0.25rem;
 }
 
-.player-footer-artists,
-.search-item-artists {
-  opacity: 0.7;
-}
-
-.player-footer-btn {
-  background: #333333;
-  color: #fff;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  margin: 0 1em 0 0;
+@media (min-width: 775px) {
+  .player-footer-img {
+    position: absolute;
+  }
 }
