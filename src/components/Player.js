@@ -16,7 +16,7 @@ function Player(props) {
 
   function search(e) {
     e.preventDefault();
-    fetch(`https://api.spotify.com/v1/search?q=${searchInput.split(" ").join('%20')}&type=artist,track,album&limit=2`, {
+    fetch(`https://api.spotify.com/v1/search?q=${searchInput.split(" ").join('%20')}%20genre:classical&type=artist,track,album&limit=2`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${props.token}`
